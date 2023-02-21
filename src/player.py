@@ -13,24 +13,35 @@ class Player(pg.sprite.Sprite):
 
     def read_key_input(self):
         for e in pg.event.get():
+            if e.type == pg.QUIT:
+                    pg.quit()
+                    quit()
             if e.type == pg.KEYDOWN:
                 if e.key == pg.K_LEFT:
                     self._v.x = -1
-                    self._v.y = 0
                 elif e.key == pg.K_RIGHT:
                     self._v.x = 1
-                    self._v.y = 0
                 elif e.key == pg.K_DOWN:
-                    self._v.x = 0
                     self._v.y = 1
                 elif e.key == pg.K_UP:
-                    self._v.x = 0
                     self._v.y = -1
 
         pressed_keys = pg.key.get_pressed()
-        if not pressed_keys[pg.K_UP] and pressed_keys[pg.K_DOWN] and pressed_keys[pg.K_RIGHT] and pressed_keys[pg.K_LEFT]:
+        if not pressed_keys[pg.K_UP] and not pressed_keys[pg.K_DOWN] and not pressed_keys[pg.K_RIGHT] and not pressed_keys[pg.K_LEFT]:
             self._v.x = 0
             self._v.y = 0
 
+    def check_collisions(self, rect):
+        for s in self._collisions:
+            if s.rect.colliderect(self._rect):
+                return True
+        return False
+
+    def move(self):
+        self.rect.topleft += self._v * self._speed
+        if self.check_collisions():
+            self._rect.topleft -= self._v * self._speed
+
     def update(self):
         self.read_key_input()
+        self.move()

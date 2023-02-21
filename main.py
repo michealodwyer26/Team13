@@ -16,11 +16,6 @@ class Main:
     def run(self):
         running = True 
         while running:
-            for e in pg.event.get():
-                if e.type == pg.QUIT:
-                    pg.quit()
-                    quit()
-                
             self._screen.fill((0, 0, 0))
             self._scene.run()
             pg.display.update()
