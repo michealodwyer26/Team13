@@ -50,6 +50,8 @@ class Player(pg.sprite.Sprite):
         return False
 
     def move(self):
+        if self._v.magnitude() != 0:
+            self._v = self._v.normalize()
         self.rect.topleft += self._v * self._speed
         if self.check_collisions() or self._in_centre:
             self.rect.topleft -= self._v * self._speed
