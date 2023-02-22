@@ -12,7 +12,7 @@ class Scene:
         self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 720*2))
         self._map_rect = self._map.get_rect()
 
-        self.map = pg.transform.scale(pg.image.load(('assets/tilemaps/map.png').convert(), (1280*2, 720*2))
+        self.map = pg.transform.scale(pg.image.load(('assets/tilemaps/map.png').convert(), (1280*2, 720*2)))
         self.map_rect = self._map.get_rect()
         
     def run(self):
