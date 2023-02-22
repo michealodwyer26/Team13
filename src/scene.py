@@ -9,8 +9,8 @@ class Scene:
         self._obstacles = pg.sprite.Group()
         self._player = Player(((S_WIDTH - TILE_SIZE) / 2, (S_HEIGHT - TILE_SIZE) / 2), [self._sprites], self._obstacles)
 
-        self.map = pg.transform.scale(pg.image.load(('assets/tilemaps/map.png').convert(), (1280*2, 720*2)))
-        self.map_rect = self._map.get_rect()
+        self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 720*2))
+        self._map_rect = self._map.get_rect()
         
     def run(self):
         self._screen.blit(self._map, self._map_rect)
