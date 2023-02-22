@@ -10,6 +10,7 @@ class Player(pg.sprite.Sprite):
 
         self._v = pg.math.Vector2()
         self._speed = 3
+        self._in_centre = False
 
     def read_key_input(self):
         for e in pg.event.get():
@@ -31,16 +32,16 @@ class Player(pg.sprite.Sprite):
             self._v.x = 0
             self._v.y = 0
 
-    def check_collisions(self, rect):
+    def check_collisions(self):
         for s in self._collisions:
-            if s.rect.colliderect(self._rect):
+            if s.rect.colliderect(self.rect):
                 return True
         return False
 
     def move(self):
         self.rect.topleft += self._v * self._speed
-        if self.check_collisions():
-            self._rect.topleft -= self._v * self._speed
+        if self.check_collisions() or self._in_centre:
+            self.rect.topleft -= self._v * self._speed
 
     def update(self):
         self.read_key_input()
