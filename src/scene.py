@@ -20,16 +20,16 @@ class Scene:
     def update(self):
         self._sprites.update()
 
-        if (self._player.rect.x < (S_WIDTH / 2) - 128) or (self._player.rect.x > (S_WIDTH / 2) + 128):
+        if (self._player.rect.x < (S_WIDTH / 2) - 64) or (self._player.rect.x > (S_WIDTH / 2) + 64):
             self._player._in_centre = True
             self._map_rect.topleft -= self._player._v * self._player._speed
 
-        if (self._player.rect.y < (S_HEIGHT / 2) - 128) or (self._player.rect.y > (S_HEIGHT / 2) + 128):
+        if (self._player.rect.y < (S_HEIGHT / 2) - 64) or (self._player.rect.y > (S_HEIGHT / 2) + 64):
             self._player._in_centre = True
             self._map_rect.topleft -= self._player._v * self._player._speed
 
-        if (self._player.rect.x < (S_WIDTH / 2) + 128) or (self._player.rect.x > (S_WIDTH / 2) - 128):
+        if (self._player.rect.x < (S_WIDTH / 2) + 64) or (self._player.rect.x > (S_WIDTH / 2) - 64):
             self._player._in_centre = False
 
-        if (self._player.rect.y < (S_HEIGHT / 2) + 128) or (self._player.rect.y > (S_HEIGHT / 2) - 128):
+        if (self._player.rect.y < (S_HEIGHT / 2) + 64) or (self._player.rect.y > (S_HEIGHT / 2) - 64):
             self._player._in_centre = False
