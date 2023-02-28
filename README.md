@@ -1,24 +1,25 @@
 # The Legend of Pyda
 
-## Team Software Project 22/23 (CS3305)
+## Third Year Team Software Project 22/23 (CS3305)
 
 **A Project by**
 
 - Tommy Lyons - 120395051
-- Micheal O'Dwyer - 
-- Kushal Suvarnkar -
+- Micheal O'Dwyer - 120333853
+- Kushal Suvarnkar - 119100043
 
 ---
 ## Table of Contents
 
 - [The Legend of Pyda](#the-legend-of-pyda)
-  - [Team Software Project 22/23 (CS3305)](#team-software-project-2223-cs3305)
+  - [Third Year Team Software Project 22/23 (CS3305)](#third-year-team-software-project-2223-cs3305)
   - [Table of Contents](#table-of-contents)
   - [Chapter One](#chapter-one)
     - [Abstract](#abstract)
     - [Our game](#our-game)
   - [Chapter Two](#chapter-two)
     - [Software Architecture Overview](#software-architecture-overview)
+  - [Chapter Three](#chapter-three)
    
 
 ---
@@ -52,14 +53,36 @@ The combat mechanics involve Melee and Ranged attacks between Players and Enemie
 
 ### Software Architecture Overview
 
-Our game is built using Pygame, a highly portable framework designed for developing video games using the Python programming language. It provides a range of tools and libraries that make it easier to develop and deploy 2D games, including tile-based games. 
+Our game is built using Pygame, a highly portable framework designed for developing video games using the Python programming language. 
 
+- **Portability**<br/>
+  Pygame is compatible with a range of operating systems, including Windows, Mac, and Linux. This makes it easy to develop and distribute your game across multiple platforms.
+
+- **Performance**<br/>
+  The framework is designed to be lightweight and fast, making it ideal for creating high-performance games.
+
+- **Simplicity**<br/>
+  By having a simple and easy-to-understand API, Pygame makes it easy for beginners to start developing games.
+
+- **Documentation**<br/>
+  Pygame has an extensive library of documentation and tutorials, making it easy to learn and troubleshoot any issues you may encounter while developing your game. This library is contributed to by an active community of developers and users, making it easy to find help and support if you need it.
+
+
+Pygame also provides a range of tools and libraries that make it easier to develop and deploy 2D games, including sprite-based games. 
 
 - **Graphic and Animation Support**<br/>
   Pygame provides many inbuilt functions that allow loading and displaying graphics in various formats, such as PNG, TSX, and JPEG. It also includes tools for manipulating and animating sprites, which are used for creating the game's characters and objects.
   
 - **Sound Support**<br/>
-  Also included in the framework is the ability to add support for sounds such as background music and other sound effects
+  Also included in the framework is the ability to add support for sounds such as background music and other sound effects. Some examples of how these sounds can be utilised to enhance user experience are: 
+
+  1. **Feedback**: Developers can add sound effects based on actions ingame such as shooting a gun or attacking an oponent.
+  2. **Atmosphere**: Different music can be added to the game at certain points to set the mood of the player, such as calm music while the game is easy and you are exploring the map, or fast paced music while fighting a boss.
+  3. **Story**: Dialogue sound effects can be added when interacting with NPCs to help the user progress through a storyline.
 
 - **Support for Input Devices**<br/>
   Pygame also includes support for input devices, allowing user keystrokes and other inputs to be interpretted by events in real-time. Gameplay can be enhanced by allowing developers to integrate other input devices than a traditional mouse and keyboard, making games accessible to a wider audience.
+
+---
+
+## Chapter Three
