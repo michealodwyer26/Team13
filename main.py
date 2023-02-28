@@ -5,7 +5,9 @@ from src.globals import *
 from src.scene import Scene
 
 pg.init()
-pg.display.set_caption("Team 13")
+pg.display.set_caption("The Legend of Pyda")
+icon = pg.image.load('assets/characters/player.png')
+pg.display.set_icon(icon)
 
 class Main:
     def __init__(self):
