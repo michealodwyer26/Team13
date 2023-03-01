@@ -13,6 +13,7 @@ class Player(pg.sprite.Sprite):
         self._animations = {'walk_down': [], 'walk_up': [], 'walk_left': [], 'walk_right': [],
                             'attack_down': [], 'attack_up': [], 'attack_left': [], 'attack_right': []}
         self._animation_state = 'walk_down'
+        self._prev_animation_state = 'walk_down'
         self._frame_index = 0
         self._animation_timer = 0
 
@@ -26,19 +27,30 @@ class Player(pg.sprite.Sprite):
             if e.type == pg.QUIT:
                     pg.quit()
                     quit()
-            if e.type == pg.KEYDOWN:
+            if e.type == pg.KEYDOWN and "attack" not in self._animation_state:
                 if e.key == pg.K_LEFT:
                     self._v.x = -1
+                    self._v.y = 0
                     self._animation_state = "walk_left"
+                    self._frame_index = 0
                 elif e.key == pg.K_RIGHT:
                     self._v.x = 1
+                    self._v.y = 0
                     self._animation_state = "walk_right"
+                    self._frame_index = 0
                 elif e.key == pg.K_DOWN:
+                    self._v.x = 0
                     self._v.y = 1
                     self._animation_state = "walk_down"
+                    self._frame_index = 0
                 elif e.key == pg.K_UP:
+                    self._v.x = 0
                     self._v.y = -1
                     self._animation_state = "walk_up"
+                    self._frame_index = 0
+                elif e.key == pg.K_SPACE:
+                    self._animation_state = self._animation_state.replace("walk", "attack")
+                    self._frame_index = 0
 
         pressed_keys = pg.key.get_pressed()
 
@@ -71,8 +83,12 @@ class Player(pg.sprite.Sprite):
 
         if self._animation_timer > 15:
             self._frame_index += 1
-            if self._frame_index == 5:
+            if self._frame_index == 2 and "attack" in self._animation_state:
+                self._animation_state = self._animation_state.replace("attack", "walk")
+                self._frame_index = 0
+            elif self._frame_index == 5:
                 self._frame_index = 0 
+
             self._animation_timer = 0
 
     def load_frame(self, rect, sprite_sheet):
@@ -83,9 +99,14 @@ class Player(pg.sprite.Sprite):
     
     def load_animations(self):
         for state in self._animations.keys():
+            sprite_sheet = pg.image.load("assets/characters/player/{}.png".format(state)).convert_alpha()
             if "walk" in state:
-                sprite_sheet = pg.image.load("assets/characters/player/{}.png".format(state)).convert_alpha()
                 for x in range(0, 193, 64):
                     self._animations[state].append(pg.transform.scale(self.load_frame((x, 0, 64, 64), sprite_sheet), (128, 128)))
                 for x in range(0, 129, 64):
                     self._animations[state].append(pg.transform.scale(self.load_frame((x, 64, 64, 64), sprite_sheet), (128, 128)))
+            if "attack" in state:
+                self._animations[state].append(pg.transform.scale(self.load_frame((0, 0, 64, 64), sprite_sheet), (128, 128)))
+                self._animations[state].append(pg.transform.scale(self.load_frame((64, 0, 64, 64), sprite_sheet), (128, 128)))
+                self._animations[state].append(pg.transform.scale(self.load_frame((0, 64, 64, 64), sprite_sheet), (128, 128)))
+
