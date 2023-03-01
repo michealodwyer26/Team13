@@ -72,7 +72,7 @@ class Player(pg.sprite.Sprite):
         if self._v.magnitude() != 0:
             self._v = self._v.normalize()
         self.rect.topleft += self._v * self._speed
-        if self.check_collisions() or self._in_centre:
+        if self.check_collisions() or self._in_centre or "attack" in self._animation_state:
             self.rect.topleft -= self._v * self._speed
 
     def update(self):
