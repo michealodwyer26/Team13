@@ -8,14 +8,15 @@ class Player(pg.sprite.Sprite):
         
         self._v = pg.math.Vector2()
         self._speed = 3
-        self._in_centre = False
 
         self._animations = {'walk_down': [], 'walk_up': [], 'walk_left': [], 'walk_right': [],
-                            'attack_down': [], 'attack_up': [], 'attack_left': [], 'attack_right': []}
+                            'attack_down': [], 'attack_up': [], 'attack_left': [], 'attack_right': [],
+                            'idle_down': [], 'idle_up': [], 'idle_left': [], 'idle_right': []}
         self._animation_state = 'walk_down'
         self._prev_animation_state = 'walk_down'
         self._frame_index = 0
         self._animation_timer = 0
+        self._in_centre = False
 
         self.load_animations()
 
@@ -50,13 +51,16 @@ class Player(pg.sprite.Sprite):
                     self._frame_index = 0
                 elif e.key == pg.K_SPACE:
                     self._animation_state = self._animation_state.replace("walk", "attack")
+                    self._animation_state = self._animation_state.replace("idle", "attack")
                     self._frame_index = 0
 
         pressed_keys = pg.key.get_pressed()
 
         if not pressed_keys[pg.K_UP] and not pressed_keys[pg.K_DOWN] and not pressed_keys[pg.K_RIGHT] and not pressed_keys[pg.K_LEFT]:
-            self._v.x = 0
-            self._v.y = 0
+            if "attack" not in self._animation_state:
+                self._v.x = 0
+                self._v.y = 0
+                self._animation_state = self._animation_state.replace("walk", "idle")
 
     def check_collisions(self):
         for s in self._collisions:
@@ -108,5 +112,9 @@ class Player(pg.sprite.Sprite):
             if "attack" in state:
                 self._animations[state].append(pg.transform.scale(self.load_frame((0, 0, 64, 64), sprite_sheet), (128, 128)))
                 self._animations[state].append(pg.transform.scale(self.load_frame((64, 0, 64, 64), sprite_sheet), (128, 128)))
+                self._animations[state].append(pg.transform.scale(self.load_frame((0, 64, 64, 64), sprite_sheet), (128, 128)))
+            if "idle" in state:
+                for x in range(0, 193, 64):
+                    self._animations[state].append(pg.transform.scale(self.load_frame((x, 0, 64, 64), sprite_sheet), (128, 128)))
                 self._animations[state].append(pg.transform.scale(self.load_frame((0, 64, 64, 64), sprite_sheet), (128, 128)))
 
