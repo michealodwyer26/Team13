@@ -65,7 +65,8 @@ class Player(pg.sprite.Sprite):
 
     def check_collisions(self):
         for s in self._collisions:
-            if s.rect.colliderect(self.rect):
+            # pg.draw.rect(pg.display.get_surface(), (255, 0, 0), s.rect)
+            if s.rect.colliderect(self.rect.inflate(-100, -100)):
                 return True
         return False
 
