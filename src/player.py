@@ -24,6 +24,12 @@ class Player(pg.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = position)
         self.weapon_attack_sound = pg.mixer.Sound("assets/sounds/sword_swipe_sound.mp3")
 
+        self.stats = {
+            'health': 100,
+            'strength': 10  
+        }
+        self.health = self.stats['health']
+
     def read_key_input(self):
         for e in pg.event.get():
             if e.type == pg.QUIT:
