@@ -7,7 +7,6 @@ class Player(pg.sprite.Sprite):
         self._collisions = collisions
         
         self._v = pg.math.Vector2()
-        self._speed = 3
 
         self._animations = {'walk_down': [], 'walk_up': [], 'walk_left': [], 'walk_right': [],
                             'attack_down': [], 'attack_up': [], 'attack_left': [], 'attack_right': [],
@@ -26,9 +25,12 @@ class Player(pg.sprite.Sprite):
 
         self.stats = {
             'health': 100,
-            'strength': 10  
+            'strength': 10,
+            'speed' : 3
         }
         self.health = self.stats['health']
+        self.exp = 0
+        self._speed = self.stats['speed']
 
     def read_key_input(self):
         for e in pg.event.get():

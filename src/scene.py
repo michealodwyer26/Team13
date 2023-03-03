@@ -1,6 +1,7 @@
 import pygame as pg 
 from src.player import Player 
 from src.globals import *
+from src.ui import UI
 
 class Scene:
     def __init__(self):
@@ -12,6 +13,8 @@ class Scene:
         self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 720*2))
         self._map_rect = self._map.get_rect()
 
+        self.ui = UI()
+
         background_music = pg.mixer.Sound("assets/sounds/356_Adventure_Begins.mp3")
         background_music.play(loops = -1)
         
@@ -19,6 +22,7 @@ class Scene:
         self._screen.blit(self._map, self._map_rect)
         self._sprites.draw(self._screen) 
         self.update()
+        self.ui.display(self._player)
 
     def update(self):
         self._sprites.update()
