@@ -22,6 +22,7 @@ class Player(pg.sprite.Sprite):
 
         self.image = self._animations[self._animation_state][self._frame_index]
         self.rect = self.image.get_rect(topleft = position)
+        self.weapon_attack_sound = pg.mixer.Sound("assets/sounds/sword_swipe_sound.mp3")
 
     def read_key_input(self):
         for e in pg.event.get():
@@ -53,6 +54,7 @@ class Player(pg.sprite.Sprite):
                     self._animation_state = self._animation_state.replace("walk", "attack")
                     self._animation_state = self._animation_state.replace("idle", "attack")
                     self._frame_index = 0
+                    self.weapon_attack_sound.play()
 
         pressed_keys = pg.key.get_pressed()
 
