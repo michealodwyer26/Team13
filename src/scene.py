@@ -3,6 +3,7 @@ import pytmx
 from src.player import Player 
 from src.enemy import Enemy
 from src.globals import *
+from src.ui import UI
 
 
 class Obstacle(pg.sprite.Sprite):
@@ -24,12 +25,13 @@ class Scene:
 
         self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 768*2))
         self._map_rect = self._map.get_rect()
-        
+
+        self.ui = UI()
         self._map_rect.topleft = (-800, -300)
         self._tiled_map = pytmx.TiledMap('assets/tilemaps/map.tmx')
         self._tm = pytmx.load_pygame("assets/tilemaps/map.tmx", pixelalpha=True)
         self.load_map_objects()
-        
+       
         background_music = pg.mixer.Sound("assets/sounds/356_Adventure_Begins.mp3")
         background_music.play(loops = -1)
         
@@ -37,6 +39,7 @@ class Scene:
         self._screen.blit(self._map, self._map_rect)
         self._sprites.draw(self._screen) 
         self.update()
+        self.ui.display(self._player)
 
     def load_map_objects(self):
         for obj in self._tm.objects:
