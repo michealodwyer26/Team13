@@ -28,7 +28,7 @@ class Player(pg.sprite.Sprite):
         self.stats = {
             'health': 100,
             'strength': 10,
-            'speed' : 3
+            'speed' : 4
         }
         self.health = self.stats['health']
         self.exp = 0
