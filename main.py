@@ -6,7 +6,7 @@ from src.scene import Scene
 
 pg.init()
 pg.display.set_caption("The Legend of Pyda")
-icon = pg.image.load('assets/characters/player.png')
+icon = pg.image.load('assets/sword_logo.png')
 pg.display.set_icon(icon)
 
 class Main:
