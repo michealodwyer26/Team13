@@ -11,6 +11,9 @@ class Scene:
 
         self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 720*2))
         self._map_rect = self._map.get_rect()
+
+        background_music = pg.mixer.Sound("assets/sounds/356_Adventure_Begins.mp3")
+        background_music.play(loops = -1)
         
     def run(self):
         self._screen.blit(self._map, self._map_rect)
