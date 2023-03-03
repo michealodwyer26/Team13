@@ -1,5 +1,6 @@
 import pygame as pg 
 from src.globals import * 
+from src.enemy import Enemy
 
 class Player(pg.sprite.Sprite):
     def __init__(self, position, groups, collisions):
@@ -15,7 +16,8 @@ class Player(pg.sprite.Sprite):
         self._prev_animation_state = 'walk_down'
         self._frame_index = 0
         self._animation_timer = 0
-        self._in_centre = False
+        self._in_centre_x = False
+        self._in_centre_y = False
 
         self.load_animations()
 
@@ -74,7 +76,10 @@ class Player(pg.sprite.Sprite):
 
     def check_collisions(self):
         for s in self._collisions:
-            if s.rect.colliderect(self.rect):
+            # pg.draw.rect(pg.display.get_surface(), (255, 0, 0), s.rect)
+            if s.rect.colliderect(self.rect.inflate(-100, -100)):
+                if isinstance(s, Enemy) and "attack" in self._animation_state:
+                    s.damage()
                 return True
         return False
 
@@ -82,12 +87,12 @@ class Player(pg.sprite.Sprite):
         if self._v.magnitude() != 0:
             self._v = self._v.normalize()
         self.rect.topleft += self._v * self._speed
-        if self.check_collisions() or self._in_centre or "attack" in self._animation_state:
+        if self.check_collisions() or "attack" in self._animation_state:
             self.rect.topleft -= self._v * self._speed
 
     def update(self):
         self.read_key_input()
-        self.move()
+        # self.move()
         self.animate() 
 
     def animate(self):

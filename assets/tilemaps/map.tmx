@@ -108,7 +108,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="Object Layer 1" visible="0">
+ <objectgroup id="3" name="objects">
   <object id="1" x="0" y="320" width="96" height="16"/>
   <object id="4" x="80" y="304" width="64" height="16"/>
   <object id="5" x="128" y="320" width="48" height="16"/>
