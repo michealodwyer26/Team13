@@ -30,22 +30,22 @@ class Player(pg.sprite.Sprite):
                     pg.quit()
                     quit()
             if e.type == pg.KEYDOWN and "attack" not in self._animation_state:
-                if e.key == pg.K_LEFT:
+                if e.key == pg.K_LEFT or e.key == pg.K_a:
                     self._v.x = -1
                     self._v.y = 0
                     self._animation_state = "walk_left"
                     self._frame_index = 0
-                elif e.key == pg.K_RIGHT:
+                elif e.key == pg.K_RIGHT or e.key == pg.K_d:
                     self._v.x = 1
                     self._v.y = 0
                     self._animation_state = "walk_right"
                     self._frame_index = 0
-                elif e.key == pg.K_DOWN:
+                elif e.key == pg.K_DOWN or e.key == pg.K_s:
                     self._v.x = 0
                     self._v.y = 1
                     self._animation_state = "walk_down"
                     self._frame_index = 0
-                elif e.key == pg.K_UP:
+                elif e.key == pg.K_UP or e.key == pg.K_w:
                     self._v.x = 0
                     self._v.y = -1
                     self._animation_state = "walk_up"
@@ -58,7 +58,7 @@ class Player(pg.sprite.Sprite):
 
         pressed_keys = pg.key.get_pressed()
 
-        if not pressed_keys[pg.K_UP] and not pressed_keys[pg.K_DOWN] and not pressed_keys[pg.K_RIGHT] and not pressed_keys[pg.K_LEFT]:
+        if not pressed_keys[pg.K_UP] and not pressed_keys[pg.K_DOWN] and not pressed_keys[pg.K_RIGHT] and not pressed_keys[pg.K_LEFT] and not pressed_keys[pg.K_w] and not pressed_keys[pg.K_a] and not pressed_keys[pg.K_s] and not pressed_keys[pg.K_d]:
             if "attack" not in self._animation_state:
                 self._v.x = 0
                 self._v.y = 0
