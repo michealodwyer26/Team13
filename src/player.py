@@ -22,6 +22,7 @@ class Player(pg.sprite.Sprite):
 
         self.image = self._animations[self._animation_state][self._frame_index]
         self.rect = self.image.get_rect(topleft = position)
+        self.weapon_attack_sound = pg.mixer.Sound("assets/sounds/sword_swipe_sound.mp3")
 
     def read_key_input(self):
         for e in pg.event.get():
@@ -29,22 +30,22 @@ class Player(pg.sprite.Sprite):
                     pg.quit()
                     quit()
             if e.type == pg.KEYDOWN and "attack" not in self._animation_state:
-                if e.key == pg.K_LEFT:
+                if e.key == pg.K_LEFT or e.key == pg.K_a:
                     self._v.x = -1
                     self._v.y = 0
                     self._animation_state = "walk_left"
                     self._frame_index = 0
-                elif e.key == pg.K_RIGHT:
+                elif e.key == pg.K_RIGHT or e.key == pg.K_d:
                     self._v.x = 1
                     self._v.y = 0
                     self._animation_state = "walk_right"
                     self._frame_index = 0
-                elif e.key == pg.K_DOWN:
+                elif e.key == pg.K_DOWN or e.key == pg.K_s:
                     self._v.x = 0
                     self._v.y = 1
                     self._animation_state = "walk_down"
                     self._frame_index = 0
-                elif e.key == pg.K_UP:
+                elif e.key == pg.K_UP or e.key == pg.K_w:
                     self._v.x = 0
                     self._v.y = -1
                     self._animation_state = "walk_up"
@@ -53,10 +54,11 @@ class Player(pg.sprite.Sprite):
                     self._animation_state = self._animation_state.replace("walk", "attack")
                     self._animation_state = self._animation_state.replace("idle", "attack")
                     self._frame_index = 0
+                    self.weapon_attack_sound.play()
 
         pressed_keys = pg.key.get_pressed()
 
-        if not pressed_keys[pg.K_UP] and not pressed_keys[pg.K_DOWN] and not pressed_keys[pg.K_RIGHT] and not pressed_keys[pg.K_LEFT]:
+        if not pressed_keys[pg.K_UP] and not pressed_keys[pg.K_DOWN] and not pressed_keys[pg.K_RIGHT] and not pressed_keys[pg.K_LEFT] and not pressed_keys[pg.K_w] and not pressed_keys[pg.K_a] and not pressed_keys[pg.K_s] and not pressed_keys[pg.K_d]:
             if "attack" not in self._animation_state:
                 self._v.x = 0
                 self._v.y = 0
