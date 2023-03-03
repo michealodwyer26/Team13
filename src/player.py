@@ -1,5 +1,6 @@
 import pygame as pg 
 from src.globals import * 
+from src.enemy import Enemy
 
 class Player(pg.sprite.Sprite):
     def __init__(self, position, groups, collisions):
@@ -67,6 +68,8 @@ class Player(pg.sprite.Sprite):
         for s in self._collisions:
             # pg.draw.rect(pg.display.get_surface(), (255, 0, 0), s.rect)
             if s.rect.colliderect(self.rect.inflate(-100, -100)):
+                if isinstance(s, Enemy) and "attack" in self._animation_state:
+                    s.damage()
                 return True
         return False
 
