@@ -2,7 +2,7 @@ import pygame as pg
 import random
 from src.globals import *
 class Enemy(pg.sprite.Sprite):
-    def __init__(self, position, groups):
+    def __init__(self, position, groups, add_exp):
         super().__init__(groups)
         # self._collisions = collisions
 
@@ -15,6 +15,7 @@ class Enemy(pg.sprite.Sprite):
         self._die_animation = []
         self._frame_index = 0
         self._animation_timer = 0
+        self.add_exp = add_exp
 
         self.load_animations()
         
@@ -33,9 +34,11 @@ class Enemy(pg.sprite.Sprite):
     
     def damage(self):
         self._health -= 10 
-        if self._health < 0:
+        if self._health <= 0:
             self.kill()
+            self.add_exp(100)
             pg.mixer.Sound("assets/sounds/slime_pop.mp3").play()
+
     
     def load_frame(self, rect, sprite_sheet):
         rectangle = pg.Rect(rect)

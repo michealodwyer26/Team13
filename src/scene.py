@@ -17,11 +17,11 @@ class Scene:
         self._sprites = pg.sprite.Group()
         self._obstacles = pg.sprite.Group()
         self._player = Player(((S_WIDTH - TILE_SIZE) / 2, (S_HEIGHT - TILE_SIZE) / 2), [self._sprites], self._obstacles)
-        self._enemy = Enemy((700, 400), [self._sprites, self._obstacles])
-        self._enemy = Enemy((100, 200), [self._sprites, self._obstacles])
-        self._enemy = Enemy((200, 700), [self._sprites, self._obstacles])
-        self._enemy = Enemy((500, 500), [self._sprites, self._obstacles])
-        self._enemy = Enemy((400, 650), [self._sprites, self._obstacles])
+        self._enemy = Enemy((700, 400), [self._sprites, self._obstacles], self.add_exp)
+        self._enemy = Enemy((100, 200), [self._sprites, self._obstacles], self.add_exp)
+        self._enemy = Enemy((200, 700), [self._sprites, self._obstacles], self.add_exp)
+        self._enemy = Enemy((500, 500), [self._sprites, self._obstacles], self.add_exp)
+        self._enemy = Enemy((400, 650), [self._sprites, self._obstacles], self.add_exp)
 
         self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 768*2))
         self._map_rect = self._map.get_rect()
@@ -45,6 +45,8 @@ class Scene:
         for obj in self._tm.objects:
             Obstacle(self._obstacles, pg.Rect((obj.x*2 - 800, obj.y*2 - 300), (obj.width*2, obj.height*2)))
 
+    def add_exp(self, amount):
+        self._player.exp += amount
 
     def update(self):
         self._sprites.update()
