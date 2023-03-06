@@ -35,6 +35,7 @@ class Enemy(pg.sprite.Sprite):
         self._health -= 10 
         if self._health < 0:
             self.kill()
+            pg.mixer.Sound("assets/sounds/slime_pop.mp3").play()
     
     def load_frame(self, rect, sprite_sheet):
         rectangle = pg.Rect(rect)
