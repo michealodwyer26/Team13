@@ -4,6 +4,7 @@ from src.player import Player
 from src.enemy import Enemy
 from src.globals import *
 from src.ui import UI
+from src.object import Object
 
 
 class Obstacle(pg.sprite.Sprite):
@@ -22,6 +23,7 @@ class Scene:
         self._enemy = Enemy((200, 700), [self._sprites, self._obstacles], self.add_exp)
         self._enemy = Enemy((500, 500), [self._sprites, self._obstacles], self.add_exp)
         self._enemy = Enemy((400, 650), [self._sprites, self._obstacles], self.add_exp)
+        self._object = Object((400, 600), [self._sprites, self._obstacles])
 
         self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 768*2))
         self._map_rect = self._map.get_rect()
