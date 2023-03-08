@@ -2,7 +2,7 @@ import pygame as pg
 import sys 
 
 from src.globals import *
-from src.scene import Scene
+from src.Intro import Intro
 
 pg.init()
 pg.display.set_caption("The Legend of Pyda")
@@ -13,7 +13,7 @@ class Main:
     def __init__(self):
         self._screen = pg.display.set_mode((S_WIDTH, S_HEIGHT))
         self._clock = pg.time.Clock()
-        self._scene = Scene()
+        self._scene = Intro()
 
     def run(self):
         running = True 
