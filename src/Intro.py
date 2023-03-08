@@ -3,9 +3,6 @@ import pytmx
 from src.player import Player 
 from src.enemy import Enemy
 from src.globals import *
-from src.ui import UI
-import main
-from src.scene import Scene
 
 
 class Obstacle(pg.sprite.Sprite):
@@ -38,20 +35,9 @@ class Intro:
         for obj in self._tm.objects:
             Obstacle(self._obstacles, pg.Rect((obj.x*2 - 800, obj.y*2 - 300), (obj.width*2, obj.height*2)))
 
-    def read_key_input(self):
-        for e in pg.event.get():
-            if e.type == pg.QUIT:
-                    pg.quit()
-                    quit()
-            if e.type == pg.KEYDOWN :
-                if e.key == pg.K_y:
-                    main._scene = Scene()
-                    print("Hello")
-
     def update(self):
         self._sprites.update()
         self.update_camera()
-        self.read_key_input()
 
     def update_camera(self):
         self._map_rect.topleft -= self._player._v * self._player._speed
