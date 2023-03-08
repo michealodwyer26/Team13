@@ -41,11 +41,11 @@ Overall, 2D tileset games played a critical role in the development of modern vi
 
 ### Our game
 
-The Legend of Pyda is a classic style of top-down role-playing game that uses 2D graphics to create an riveting gaming experience. The game is set in a fantasy world that is made up of different terrains and environments, such as forests, plains, and villages. The player controls a character, allowing them to explore the open world and complete the end goal while racking up experience.
+The Legend of Pyda is a classic style of top-down role-playing game that uses 2D graphics to create an riveting gaming experience. The game is set in a fantasy world that is made up of different terrains and environments, such as forests, plains, and villages. The player spawns in a room, where dialogue explains their goals before prompting them to press Y to say yes to the mission. They are then teleported to a plains where they can control a character, allowing them to explore the open world and complete the end goal while racking up experience.
 
 The end goal of the game is to collect as much experience as possible while completing the end goal of rescuing Princess Jasmine from the evil **BAD GUY NAME**. Experience is gained by navigating this world, completing quests, fighting enemies, and collecting items along the way.
 
-The combat mechanics involve Melee and Ranged attacks between Players and Enemies while the player traverses the terrain **NEED MORE HERE ONCE I KNOW MORE**
+The combat mechanics involve Melee and Ranged attacks between Players and Enemies while the player traverses the terrain while collecting items and powerups to increase their chances against the final boss.
 
 ---
 
@@ -78,7 +78,7 @@ Pygame also provides a range of tools and libraries that make it easier to devel
 
   1. **Feedback**: Developers can add sound effects based on actions ingame such as shooting a gun or attacking an oponent.
   2. **Atmosphere**: Different music can be added to the game at certain points to set the mood of the player, such as calm music while the game is easy and you are exploring the map, or fast paced music while fighting a boss.
-  3. **Story**: Dialogue sound effects can be added when interacting with NPCs to help the user progress through a storyline.
+  3. **Story**: Dialogue sound effects can be added when intera cting with NPCs to help the user progress through a storyline.
 
 - **Support for Input Devices**<br/>
   Pygame also includes support for input devices, allowing user keystrokes and other inputs to be interpretted by events in real-time. Gameplay can be enhanced by allowing developers to integrate other input devices than a traditional mouse and keyboard, making games accessible to a wider audience.
