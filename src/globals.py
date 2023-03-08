@@ -9,7 +9,7 @@ HEALTH_BAR_WIDTH = 200
 EXP_BAR_WIDTH = 200
 ITEM_BOX_SIZE = 80
 UI_FONT = 'assets/fonts/SuperMario256.ttf'
-UI_FONT_SIZE = 18
+UI_FONT_SIZE = 12
 
 HEALTH_COLOUR = 'red'
 EXP_CLOUR = 'green'
