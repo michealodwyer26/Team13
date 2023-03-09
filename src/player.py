@@ -1,7 +1,7 @@
 import pygame as pg 
 from src.globals import * 
 from src.enemy import Enemy
-from src.object import Object
+from src.object import *
 from src.ui import UI
 
 class Player(pg.sprite.Sprite):
@@ -34,6 +34,7 @@ class Player(pg.sprite.Sprite):
             'speed' : 4
         }
         self.health = self.stats['health']
+        self.strength = self.stats['strength']
         self.exp = 0
         self._speed = self.stats['speed']
         self._ready = False
@@ -89,8 +90,10 @@ class Player(pg.sprite.Sprite):
             if s.rect.colliderect(self.rect.inflate(-100, -100)):
                 if isinstance(s, Enemy) and "attack" in self._animation_state:
                     s.damage()
-                if isinstance(s, Object) and "attack" in self._animation_state:
+                if isinstance(s, Health_Item):
                     s.heal()
+                if isinstance(s, Strength_Item):
+                    s.buff()
                 return True
         return False
 
