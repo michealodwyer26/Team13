@@ -2,6 +2,7 @@ import pygame as pg
 from src.globals import * 
 from src.enemy import Enemy
 from src.object import Object
+from src.ui import UI
 
 class Player(pg.sprite.Sprite):
     def __init__(self, position, groups, collisions):
@@ -19,7 +20,8 @@ class Player(pg.sprite.Sprite):
         self._animation_timer = 0
         self._in_centre_x = False
         self._in_centre_y = False
-
+        self.counter = 0
+        
         self.load_animations()
 
         self.image = self._animations[self._animation_state][self._frame_index]
@@ -69,6 +71,8 @@ class Player(pg.sprite.Sprite):
                     self.weapon_attack_sound.play()
                 elif e.key == pg.K_y:
                     self._ready = True
+                elif e.key == pg.K_RETURN:
+                    self.counter += 1
 
 
         pressed_keys = pg.key.get_pressed()
