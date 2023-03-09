@@ -43,9 +43,11 @@ class Intro:
         self._sprites.update()
         self.update_camera()
         self.is_ready()
+        self.ui.display_dialogue(self._player)
 
     def is_ready(self):
         return self._player._ready
+
     
     def update_camera(self):
         self._map_rect.topleft -= self._player._v * self._player._speed
