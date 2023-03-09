@@ -36,7 +36,7 @@ class Enemy(pg.sprite.Sprite):
         self._health -= 10 
         if self._health <= 0:
             self.kill()
-            self.add_exp(100)
+            self.add_exp(1000)
             pg.mixer.Sound("assets/sounds/slime_pop.mp3").play()
 
     
