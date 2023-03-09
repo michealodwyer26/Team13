@@ -1,6 +1,7 @@
 import pygame as pg 
 from src.globals import * 
 from src.enemy import Enemy
+from src.object import Object
 
 class Player(pg.sprite.Sprite):
     def __init__(self, position, groups, collisions):
@@ -33,6 +34,7 @@ class Player(pg.sprite.Sprite):
         self.health = self.stats['health']
         self.exp = 0
         self._speed = self.stats['speed']
+        self._ready = False
 
     def read_key_input(self):
         for e in pg.event.get():
@@ -65,6 +67,9 @@ class Player(pg.sprite.Sprite):
                     self._animation_state = self._animation_state.replace("idle", "attack")
                     self._frame_index = 0
                     self.weapon_attack_sound.play()
+                elif e.key == pg.K_y:
+                    self._ready = True
+
 
         pressed_keys = pg.key.get_pressed()
 
@@ -80,6 +85,8 @@ class Player(pg.sprite.Sprite):
             if s.rect.colliderect(self.rect.inflate(-100, -100)):
                 if isinstance(s, Enemy) and "attack" in self._animation_state:
                     s.damage()
+                if isinstance(s, Object) and "attack" in self._animation_state:
+                    s.heal()
                 return True
         return False
 

@@ -1,7 +1,7 @@
 import pygame as pg 
 import pytmx
-from src.player import Player
-from src.scene import Scene
+from src.player import Player 
+from src.enemy import Enemy
 from src.globals import *
 
 
@@ -10,20 +10,19 @@ class Obstacle(pg.sprite.Sprite):
         super().__init__(groups)
         self.rect = rect 
 
-class Intro:
+class Dungeon:
     def __init__(self):
         self._screen = pg.display.get_surface()
-        self._scene = Scene()
         self._sprites = pg.sprite.Group()
         self._obstacles = pg.sprite.Group()
         self._player = Player(((S_WIDTH - TILE_SIZE) / 2, (S_HEIGHT - TILE_SIZE) / 2), [self._sprites], self._obstacles)
 
-        self._map = pg.transform.scale(pg.image.load("assets/tilemaps/Intro.png").convert(), (1280, 768))
+        self._map = pg.transform.scale(pg.image.load("assets/tilemaps/Dungeon.png").convert(), (1280, 768))
         self._map_rect = self._map.get_rect()
 
         self._map_rect.topleft = (-800, -300)
-        self._tiled_map = pytmx.TiledMap('assets/tilemaps/Intro.tmx')
-        self._tm = pytmx.load_pygame("assets/tilemaps/Intro.tmx", pixelalpha=True)
+        self._tiled_map = pytmx.TiledMap('assets/tilemaps/Dungeon.tmx')
+        self._tm = pytmx.load_pygame("assets/tilemaps/Dungeon.tmx", pixelalpha=True)
         self.load_map_objects()
     
         
@@ -39,11 +38,7 @@ class Intro:
     def update(self):
         self._sprites.update()
         self.update_camera()
-        self.is_ready()
 
-    def is_ready(self):
-        return self._player._ready
-    
     def update_camera(self):
         self._map_rect.topleft -= self._player._v * self._player._speed
         for obj in self._obstacles:

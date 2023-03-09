@@ -23,7 +23,7 @@ class Scene:
         self._enemy = Enemy((200, 700), [self._sprites, self._obstacles], self.add_exp)
         self._enemy = Enemy((500, 500), [self._sprites, self._obstacles], self.add_exp)
         self._enemy = Enemy((400, 650), [self._sprites, self._obstacles], self.add_exp)
-        self._object = Object((400, 600), [self._sprites, self._obstacles])
+        self._object = Object((400, 600), [self._sprites, self._obstacles], self.add_health)
 
         self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 768*2))
         self._map_rect = self._map.get_rect()
@@ -49,6 +49,12 @@ class Scene:
 
     def add_exp(self, amount):
         self._player.exp += amount
+    
+    def add_health(self, amount):
+        self._player.health += amount
+    
+    def check_exp(self):
+        return self._player.exp
 
     def update(self):
         self._sprites.update()
