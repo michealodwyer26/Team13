@@ -3,6 +3,7 @@ import pytmx
 from src.player import Player 
 from src.enemy import Enemy
 from src.globals import *
+from src.ui import UI
 
 
 class Obstacle(pg.sprite.Sprite):
@@ -19,6 +20,7 @@ class Dungeon:
 
         self._map = pg.transform.scale(pg.image.load("assets/tilemaps/Dungeon.png").convert(), (1280, 768))
         self._map_rect = self._map.get_rect()
+        self.ui = UI()
 
         self._map_rect.topleft = (-800, -300)
         self._tiled_map = pytmx.TiledMap('assets/tilemaps/Dungeon.tmx')
@@ -30,6 +32,7 @@ class Dungeon:
         self._screen.blit(self._map, self._map_rect)
         self._sprites.draw(self._screen) 
         self.update()
+        self.ui.display(self._player)
 
     def load_map_objects(self):
         for obj in self._tm.objects:
