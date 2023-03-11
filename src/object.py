@@ -10,7 +10,7 @@ class Health_Item(pg.sprite.Sprite):
         self.add_health = add_health
 
         self.image = pg.image.load("assets/objects/heart.png")
-        self.image = pg.transform.scale(self.image, (self.image.get_rect().width / 1.5, self.image.get_rect().height / 1.5))
+        self.image = pg.transform.scale(self.image, (self.image.get_rect().width / 37, self.image.get_rect().height / 37))
         
         self.rect = self.image.get_rect(topleft = position)
     
@@ -34,6 +34,5 @@ class Strength_Item(pg.sprite.Sprite):
     def buff(self):
         self.add_strength(2)
         self.kill()
-        pg.mixer.Sound("assets/sounds/heartbeat.mp3").play()
     
 

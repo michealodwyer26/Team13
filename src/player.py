@@ -2,13 +2,12 @@ import pygame as pg
 from src.globals import * 
 from src.enemy import Enemy
 from src.object import *
-from src.ui import UI
 
 class Player(pg.sprite.Sprite):
     def __init__(self, position, groups, collisions):
         super().__init__(groups)
         self._collisions = collisions
-        
+    
         self._v = pg.math.Vector2()
 
         self._animations = {'walk_down': [], 'walk_up': [], 'walk_left': [], 'walk_right': [],
@@ -89,7 +88,7 @@ class Player(pg.sprite.Sprite):
             # pg.draw.rect(pg.display.get_surface(), (255, 0, 0), s.rect)
             if s.rect.colliderect(self.rect.inflate(-100, -100)):
                 if isinstance(s, Enemy) and "attack" in self._animation_state:
-                    s.damage()
+                    s.damage(self.strength)
                 if isinstance(s, Health_Item):
                     s.heal()
                 if isinstance(s, Strength_Item):

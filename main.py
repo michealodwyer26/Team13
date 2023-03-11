@@ -16,7 +16,6 @@ class Main:
         self._screen = pg.display.set_mode((S_WIDTH, S_HEIGHT))
         self._clock = pg.time.Clock()
         self._scene = Intro()
-        self.counter = 0
 
     def run(self):
         running = True 
@@ -29,6 +28,9 @@ class Main:
             if (isinstance(self._scene, Scene)):
                 if (self._scene.check_exp() >= 1000):
                     self._scene = Dungeon()
+            if (isinstance(self._scene, Scene)):
+                if (self._scene.is_dead == True):
+                    self._scene = Intro()
             pg.display.update()
             self._clock.tick(FPS)
 

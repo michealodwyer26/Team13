@@ -5,6 +5,7 @@ from src.enemy import Enemy
 from src.globals import *
 from src.ui import UI
 from src.object import Health_Item, Strength_Item
+import random
 
 
 class Obstacle(pg.sprite.Sprite):
@@ -18,11 +19,7 @@ class Scene:
         self._sprites = pg.sprite.Group()
         self._obstacles = pg.sprite.Group()
         self._player = Player(((S_WIDTH - TILE_SIZE) / 2, (S_HEIGHT - TILE_SIZE) / 2), [self._sprites], self._obstacles)
-        self._enemy = Enemy((700, 400), [self._sprites, self._obstacles], self.add_exp)
-        self._enemy = Enemy((100, 200), [self._sprites, self._obstacles], self.add_exp)
-        self._enemy = Enemy((200, 700), [self._sprites, self._obstacles], self.add_exp)
-        self._enemy = Enemy((500, 500), [self._sprites, self._obstacles], self.add_exp)
-        self._enemy = Enemy((400, 650), [self._sprites, self._obstacles], self.add_exp)
+        
         self._health_item = Health_Item((400, 600), [self._sprites, self._obstacles], self.add_health)
         self._strength_item = Strength_Item((400, 500), [self._sprites, self._obstacles], self.add_strength)
 
@@ -34,7 +31,8 @@ class Scene:
         self._tiled_map = pytmx.TiledMap('assets/tilemaps/map.tmx')
         self._tm = pytmx.load_pygame("assets/tilemaps/map.tmx", pixelalpha=True)
         self.load_map_objects()
-    
+        self.spawn_wave()
+        self.is_dead = False
         background_music = pg.mixer.Sound("assets/sounds/356_Adventure_Begins.mp3")
         background_music.play(loops = -1)
         
@@ -43,6 +41,8 @@ class Scene:
         self._sprites.draw(self._screen) 
         self.update()
         self.ui.display(self._player)
+        if self._player.health <= 0:
+            self.is_dead = True
 
     def load_map_objects(self):
         for obj in self._tm.objects:
@@ -60,6 +60,17 @@ class Scene:
     def check_exp(self):
         return self._player.exp
 
+    def spawn_enemy(self):
+        self._enemy = Enemy((random.randint(100,1000), random.randint(100,1000)), [self._sprites, self._obstacles], self._obstacles, self.attack, self, self._player)
+
+    def spawn_wave(self):
+        for i in range(5):
+            self.spawn_enemy()
+
+    def attack(self):
+        self._player.health -= 1
+        print("Hit")
+                    
     def update(self):
         self._sprites.update()
         self.update_camera()

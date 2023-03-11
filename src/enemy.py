@@ -1,21 +1,25 @@
 import pygame as pg
 import random
 from src.globals import *
-class Enemy(pg.sprite.Sprite):
-    def __init__(self, position, groups, add_exp):
-        super().__init__(groups)
-        # self._collisions = collisions
 
-        self._v = pg.math.Vector2(0, -1)
+class Enemy(pg.sprite.Sprite):
+    def __init__(self, position, groups, collisions, attack, scene, player):
+        super().__init__(groups)
+        self._collisions = collisions
+
+        self.enemy_v = pg.math.Vector2(0, -1)
         self._speed = 0.5
-        self._health = 100
+        self._health = 250
         self._damage_filter = 0
 
         self._animation = []
         self._die_animation = []
         self._frame_index = 0
         self._animation_timer = 0
-        self.add_exp = add_exp
+        self.add_exp = scene.add_exp
+        self.spawn_wave = scene.spawn_wave
+        self.player = player
+        self.attack = attack
 
         self.load_animations()
         
@@ -25,20 +29,21 @@ class Enemy(pg.sprite.Sprite):
     def update(self):
         self.move()
         self.animate()  
+        self.attack()
 
     def check_collisions(self):
         for s in self._collisions:
-            if s.rect.colliderect(self.rect):
+            if isinstance(s, Enemy):
                 return True
         return False
     
-    def damage(self):
-        self._health -= 10 
+    def damage(self, damage):
+        self._health -= damage
         if self._health <= 0:
             self.kill()
-            self.add_exp(1000)
+            self.spawn_wave()
+            self.add_exp(random.randint(10,40))
             pg.mixer.Sound("assets/sounds/slime_pop.mp3").play()
-
     
     def load_frame(self, rect, sprite_sheet):
         rectangle = pg.Rect(rect)
@@ -47,25 +52,22 @@ class Enemy(pg.sprite.Sprite):
         return pg.transform.scale(frame, (64, 64))
 
     def move(self):
-        if self._v.magnitude() != 0:
-            self._v = self._v.normalize()
-        self.rect.topleft += self._v * self._speed
-        # if self.check_collisions():
-        #     self.rect.topleft -= self._v * self._speed
-
-        rand = random.randint(0, 20)
+        if self.enemy_v.magnitude() != 0:
+            self.enemy_v = self.enemy_v.normalize() 
+        rand = random.randint(0, 3)
         if rand == 0:
-            self._v.x = -1
-        if rand == 1:
-            self._v.y = -1
-        if rand == 2:
-            self._v.x = 1
-        if rand == 3:
-            self._v.y = 1
+            self.enemy_v.x = -1
+        elif rand == 1:
+            self.enemy_v.y = -1
+        elif rand == 2:
+            self.enemy_v.x = 1
+        elif rand == 3:
+            self.enemy_v.y = 1
         if self._damage_filter > 0:
             self._damage_filter -= 1
-        
-        
+        if self.check_collisions():
+            self.rect.topleft += self.enemy_v * self._speed
+    
 
     def animate(self):
         self.image = self._animation[self._frame_index]
