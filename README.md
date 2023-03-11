@@ -19,7 +19,10 @@
     - [Our game](#our-game)
   - [Chapter Two](#chapter-two)
     - [Software Architecture Overview](#software-architecture-overview)
+      - [Advantages](#advantages)
+        - [Tools and Libraries](#tools-and-libraries)
   - [Chapter Three](#chapter-three)
+    - [Features](#features)
    
 
 ---
@@ -53,6 +56,8 @@ The combat mechanics involve Melee and Ranged attacks between Players and Enemie
 
 ### Software Architecture Overview
 
+#### Advantages
+
 Our game is built using Pygame, a highly portable framework designed for developing video games using the Python programming language. 
 
 - **Portability**<br/>
@@ -67,7 +72,7 @@ Our game is built using Pygame, a highly portable framework designed for develop
 - **Documentation**<br/>
   Pygame has an extensive library of documentation and tutorials, making it easy to learn and troubleshoot any issues you may encounter while developing your game. This library is contributed to by an active community of developers and users, making it easy to find help and support if you need it.
 
-
+##### Tools and Libraries
 Pygame also provides a range of tools and libraries that make it easier to develop and deploy 2D games, including sprite-based games. 
 
 - **Graphic and Animation Support**<br/>
@@ -86,3 +91,6 @@ Pygame also provides a range of tools and libraries that make it easier to devel
 ---
 
 ## Chapter Three
+
+### Features
+
