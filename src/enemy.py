@@ -39,8 +39,11 @@ class Enemy(pg.sprite.Sprite):
     
     def damage(self):
         self._health -= random.randint(5, 10) 
-        self.rect.x -= self._v.x * 15 
-        self.rect.y -= self._v.y * 15 
+        self.rect.x -= self._v.x * 10
+        self.rect.y -= self._v.y * 10
+        if self.check_collisions:
+            self.rect.x += self._v.x * 5
+            self.rect.y += self._v.y * 5 
         if self._health <= 0:
             self.kill()
             self.add_exp(60)

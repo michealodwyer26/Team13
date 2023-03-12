@@ -10,7 +10,7 @@ class Boss(pg.sprite.Sprite):
 
         self._v = pg.math.Vector2(0, 0)
         self._speed = 25
-        self._health = 1000
+        self._health = 0
         self._damage_filter = 0
 
         self._idle_animation = []

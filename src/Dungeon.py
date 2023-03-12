@@ -31,6 +31,9 @@ class Dungeon:
         self._tiled_map = pytmx.TiledMap('assets/tilemaps/dungeon.tmx')
         self._tm = pytmx.load_pygame("assets/tilemaps/dungeon.tmx", pixelalpha=True)
         self.load_map_objects()
+
+        background_music = pg.mixer.Sound("assets/sounds/dungeon.mp3")
+        background_music.play(loops = -1)
     
         
     def run(self):

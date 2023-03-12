@@ -1,5 +1,6 @@
 import pygame as pg 
 import pytmx
+import time
 from src.player import Player 
 from src.enemy import Enemy
 from src.globals import *
@@ -33,9 +34,8 @@ class Scene:
         self._tiled_map = pytmx.TiledMap('assets/tilemaps/map2.tmx')
         self._tm = pytmx.load_pygame("assets/tilemaps/map2.tmx", pixelalpha=True)
         self.load_map_objects()
-    
-        background_music = pg.mixer.Sound("assets/sounds/356_Adventure_Begins.mp3")
-        background_music.play(loops = -1)
+
+
         
     def run(self):
         self._screen.blit(self._map, self._map_rect)
@@ -62,7 +62,6 @@ class Scene:
     def update(self):
         self._sprites.update()
         self.update_camera()
-        print(self._map_rect.x, self._map_rect.y)
 
     def update_camera(self):
         self._map_rect.topleft -= self._player._v * self._player._speed
