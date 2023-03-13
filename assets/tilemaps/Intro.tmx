@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="13">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="27">
  <tileset firstgid="1" name="TopDownHouse_FloorsAndWalls" tilewidth="16" tileheight="16" tilecount="162" columns="18">
   <image source="../tilesets/TopDownHouse_FloorsAndWalls.png" width="288" height="144"/>
  </tileset>
@@ -54,16 +54,15 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="4" name="Object Layer 1">
-  <object id="1" x="0.666667" y="0" width="316" height="144.667"/>
-  <object id="2" x="0.666667" y="144.667" width="158.667" height="11.3333"/>
-  <object id="3" x="262.667" y="146" width="21.3333" height="12.6667"/>
-  <object id="4" x="247.333" y="225.333" width="54" height="30.6667"/>
-  <object id="5" x="224" y="262" width="28" height="36.6667"/>
-  <object id="6" x="260" y="266" width="30" height="21.3333"/>
-  <object id="7" x="302.667" y="146.667" width="18" height="171.333"/>
-  <object id="8" x="303.333" y="134.667" width="16" height="28"/>
-  <object id="9" x="-0.666667" y="142" width="15.3333" height="177.333"/>
-  <object id="10" x="-0.666667" y="304" width="320" height="14.6667"/>
+ <objectgroup id="5" name="objects">
+  <object id="13" x="14" y="144" width="146" height="15"/>
+  <object id="14" x="160" y="128" width="96" height="16"/>
+  <object id="16" x="256" y="144" width="64" height="16"/>
+  <object id="17" x="304" y="160" width="16" height="144"/>
+  <object id="18" x="16" y="304" width="288" height="16"/>
+  <object id="19" x="0" y="160" width="16" height="144"/>
+  <object id="24" x="224" y="256" width="16" height="48"/>
+  <object id="25" x="240" y="224" width="16" height="32"/>
+  <object id="26" x="256" y="224" width="48" height="16"/>
  </objectgroup>
 </map>
