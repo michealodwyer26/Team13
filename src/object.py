@@ -9,7 +9,7 @@ class Health_Item(pg.sprite.Sprite):
         self._v = pg.math.Vector2(0, -1)
         self.add_health = add_health
 
-        self.image = pg.image.load("assets/objects/heart.png")
+        self.image = pg.image.load("assets/objects/heart.png").convert_alpha()
         self.image = pg.transform.scale(self.image, (self.image.get_rect().width / 1.5, self.image.get_rect().height / 1.5))
         
         self.rect = self.image.get_rect(topleft = position)
@@ -26,7 +26,7 @@ class Strength_Item(pg.sprite.Sprite):
         self._v = pg.math.Vector2(0, -1)
         self.add_strength = add_strength
 
-        self.image = pg.image.load("assets/objects/strength.png")
+        self.image = pg.image.load("assets/objects/strength.png").convert_alpha()
         self.image = pg.transform.scale(self.image, (self.image.get_rect().width / 37, self.image.get_rect().height / 37))
         
         self.rect = self.image.get_rect(topleft = position)

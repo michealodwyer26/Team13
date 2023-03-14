@@ -14,7 +14,6 @@ class Obstacle(pg.sprite.Sprite):
 class Intro:
     def __init__(self):
         self._screen = pg.display.get_surface()
-        self._scene = Scene()
         self._sprites = pg.sprite.Group()
         self._obstacles = pg.sprite.Group()
         self._player = Player(((S_WIDTH - TILE_SIZE) / 2, (S_HEIGHT - TILE_SIZE) / 2), [self._sprites], self._obstacles, True)

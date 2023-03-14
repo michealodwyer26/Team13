@@ -3,11 +3,13 @@ from src.globals import *
 from src.enemy import Enemy
 from src.object import *
 from src.ui import UI
+from src.boss import Boss
 
 class Player(pg.sprite.Sprite):
-    def __init__(self, position, groups, collisions):
+    def __init__(self, position, groups, collisions, move):
         super().__init__(groups)
         self._collisions = collisions
+        self._move = move
         
         self._v = pg.math.Vector2()
 
@@ -31,7 +33,7 @@ class Player(pg.sprite.Sprite):
         self.stats = {
             'health': 100,
             'strength': 10,
-            'speed' : 4
+            'speed' : 3
         }
         self.health = self.stats['health']
         self.strength = self.stats['strength']
@@ -88,13 +90,21 @@ class Player(pg.sprite.Sprite):
         for s in self._collisions:
             # pg.draw.rect(pg.display.get_surface(), (255, 0, 0), s.rect)
             if s.rect.colliderect(self.rect.inflate(-100, -100)):
-                if isinstance(s, Enemy) and "attack" in self._animation_state:
-                    s.damage()
+                if isinstance(s, Enemy):
+                    self.health -= 1 
+                    s.rect.x += self._v.x * 5 
+                    s.rect.y += self._v.y * 5 
                 if isinstance(s, Health_Item):
                     s.heal()
                 if isinstance(s, Strength_Item):
                     s.buff()
+                if isinstance(s, Boss):
+                    s.rect.x += self._v.x * 15 
+                    s.rect.y += self._v.y * 15
                 return True
+            elif s.rect.colliderect(self.rect.inflate(100, 100)):
+                if (isinstance(s, Enemy) or isinstance(s, Boss)) and "attack" in self._animation_state:
+                    s.damage()
         return False
 
     def move(self):
@@ -106,7 +116,8 @@ class Player(pg.sprite.Sprite):
 
     def update(self):
         self.read_key_input()
-        # self.move()
+        if self._move:
+            self.move()
         self.animate() 
 
     def animate(self):

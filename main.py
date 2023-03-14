@@ -15,7 +15,7 @@ class Main:
     def __init__(self):
         self._screen = pg.display.set_mode((S_WIDTH, S_HEIGHT))
         self._clock = pg.time.Clock()
-        self._scene = Intro()
+        self._scene = Dungeon()
         self.counter = 0
 
     def run(self):
@@ -23,12 +23,12 @@ class Main:
         while running:
             self._screen.fill((0, 0, 0))
             self._scene.run()
-            if (isinstance(self._scene, Intro)):
-                if (self._scene.is_ready() == True):
-                    self._scene = Scene()
-            if (isinstance(self._scene, Scene)):
-                if (self._scene.check_exp() >= 1000):
-                    self._scene = Dungeon()
+            # if (isinstance(self._scene, Intro)):
+            #     if (self._scene.is_ready() == True):
+            #         self._scene = Scene()
+            # if (isinstance(self._scene, Scene)):
+            #     if (self._scene.check_exp() >= 1000):
+            #         self._scene = Dungeon()
             pg.display.update()
             self._clock.tick(FPS)
 

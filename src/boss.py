@@ -1,27 +1,27 @@
 import pygame as pg
 import random
 from src.globals import *
-class Enemy(pg.sprite.Sprite):
-    def __init__(self, position, groups, collisions, add_exp, player, id):
+
+class Boss(pg.sprite.Sprite):
+    def __init__(self, position, groups, collisions, player):
         super().__init__(groups)
         self._collisions = collisions
         self._player = player
-        self._id = id
 
         self._v = pg.math.Vector2(0, 0)
-        self._speed = 5
-        self._health = 100
+        self._speed = 25
+        self._health = 1000
         self._damage_filter = 0
 
-        self._animation = []
-        self._die_animation = []
+        self._idle_animation = []
+        self._left_attack = []
+        self._right_attack = []
         self._frame_index = 0
         self._animation_timer = 0
-        self.add_exp = add_exp
 
         self.load_animations()
         
-        self.image = self._animation[0]
+        self.image = self._idle_animation[0]
         self.rect = self.image.get_rect(topleft = position)
 
     def update(self):
@@ -31,7 +31,7 @@ class Enemy(pg.sprite.Sprite):
     def check_collisions(self):
         for s in self._collisions:
             if s.rect.colliderect(self.rect):
-                if isinstance(s, Enemy) and s._id == self._id:
+                if isinstance(s, Boss):
                     pass
                 else: 
                     return True
@@ -39,12 +39,11 @@ class Enemy(pg.sprite.Sprite):
     
     def damage(self):
         self._health -= random.randint(5, 10) 
-        self.rect.x -= self._v.x * 15 
-        self.rect.y -= self._v.y * 15 
+        self.rect.x -= self._v.x * 5 
+        self.rect.y -= self._v.y * 5
+
         if self._health <= 0:
             self.kill()
-            self.add_exp(60)
-            pg.mixer.Sound("assets/sounds/slime_pop.mp3").play()
 
     
     def load_frame(self, rect, sprite_sheet):
@@ -77,19 +76,23 @@ class Enemy(pg.sprite.Sprite):
         
 
     def animate(self):
-        self.image = self._animation[self._frame_index]
+        self.image = self._idle_animation[self._frame_index]
+        if self._v.x == -1:
+            self.image = pg.transform.flip(self._idle_animation[self._frame_index], True, False)
         self._animation_timer += 1
 
         if self._animation_timer > 15:
             self._frame_index += 1
-            if self._frame_index == 6:
+            if self._frame_index == 3:
                 self._frame_index = 0
             self._animation_timer = 0
             self.move()
 
     def load_animations(self):
-        sprite_sheet = pg.image.load("assets/characters/slime.png").convert_alpha()
-        for x in range(0, 193, 32):
-            self._animation.append(pg.transform.scale(self.load_frame((x, 64, 32, 32), sprite_sheet), (64, 64)))
-        for x in range(0, 129, 32):
-            self._die_animation.append(pg.transform.scale(self.load_frame((x, 128, 32, 32), sprite_sheet), (64, 64)))
+        sprite_sheet = pg.image.load("assets/characters/boss/attacking.png").convert_alpha()
+        for x in range(0, 501, 100):
+            self._idle_animation.append(pg.transform.scale(self.load_frame((x, 0, 100, 100), sprite_sheet), (128*1.5, 128*1.5)))
+        for x in range(0, 501, 100):
+            self._idle_animation.append(pg.transform.scale(self.load_frame((x, 100, 100, 100), sprite_sheet), (128*1.5, 128*1.5)))
+        for _ in range(0, 5):
+            self._idle_animation.append(pg.transform.scale(self.load_frame((0, 200, 100, 100), sprite_sheet), (128*1.5, 128*1.5)))

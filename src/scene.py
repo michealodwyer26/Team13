@@ -17,22 +17,21 @@ class Scene:
         self._screen = pg.display.get_surface()
         self._sprites = pg.sprite.Group()
         self._obstacles = pg.sprite.Group()
-        self._player = Player(((S_WIDTH - TILE_SIZE) / 2, (S_HEIGHT - TILE_SIZE) / 2), [self._sprites], self._obstacles)
-        self._enemy = Enemy((700, 400), [self._sprites, self._obstacles], self.add_exp)
-        self._enemy = Enemy((100, 200), [self._sprites, self._obstacles], self.add_exp)
-        self._enemy = Enemy((200, 700), [self._sprites, self._obstacles], self.add_exp)
-        self._enemy = Enemy((500, 500), [self._sprites, self._obstacles], self.add_exp)
-        self._enemy = Enemy((400, 650), [self._sprites, self._obstacles], self.add_exp)
+        self._player = Player(((S_WIDTH - TILE_SIZE) / 2, (S_HEIGHT - TILE_SIZE) / 2), [self._sprites], self._obstacles, False)
+
+        for id, pos in enumerate(enemy_tile_positions):
+            Enemy((pos[0]*16*1.5 - 676, pos[1]*16*1.5 - 3132), [self._sprites, self._obstacles], self._obstacles, self.add_exp, self._player, id)
+
         self._health_item = Health_Item((400, 600), [self._sprites, self._obstacles], self.add_health)
         self._strength_item = Strength_Item((400, 500), [self._sprites, self._obstacles], self.add_strength)
 
-        self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map.png").convert(), (1280*2, 768*2))
+        self._map = pg.transform.scale(pg.image.load("assets/tilemaps/map2.png").convert(), (200*16*1.5, 200*16*1.5))
         self._map_rect = self._map.get_rect()
 
         self.ui = UI()
-        self._map_rect.topleft = (-800, -300)
-        self._tiled_map = pytmx.TiledMap('assets/tilemaps/map.tmx')
-        self._tm = pytmx.load_pygame("assets/tilemaps/map.tmx", pixelalpha=True)
+        self._map_rect.topleft = (-676, -3132)
+        self._tiled_map = pytmx.TiledMap('assets/tilemaps/map2.tmx')
+        self._tm = pytmx.load_pygame("assets/tilemaps/map2.tmx", pixelalpha=True)
         self.load_map_objects()
     
         background_music = pg.mixer.Sound("assets/sounds/356_Adventure_Begins.mp3")
@@ -46,7 +45,7 @@ class Scene:
 
     def load_map_objects(self):
         for obj in self._tm.objects:
-            Obstacle(self._obstacles, pg.Rect((obj.x*2 - 800, obj.y*2 - 300), (obj.width*2, obj.height*2)))
+            Obstacle(self._obstacles, pg.Rect((obj.x*1.5 - 676, obj.y*1.5 - 3132), (obj.width*1.5, obj.height*1.5)))
 
     def add_exp(self, amount):
         self._player.exp += amount
@@ -63,6 +62,7 @@ class Scene:
     def update(self):
         self._sprites.update()
         self.update_camera()
+        print(self._map_rect.x, self._map_rect.y)
 
     def update_camera(self):
         self._map_rect.topleft -= self._player._v * self._player._speed
